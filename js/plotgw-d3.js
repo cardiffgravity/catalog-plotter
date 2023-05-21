@@ -24,7 +24,7 @@ function GWCatalogue(inp){
     }else{this.confirmedOnly = (inp)&&(inp.hasOwnProperty('confirmedOnly')) ? JSON.parse(inp.confirmedOnly) : false}
     if (this.urlVars.hasOwnProperty('noCandidates')){
         this.noCandidates=JSON.parse(this.urlVars.noCandidates);
-    }else{this.noCandidates = (inp)&&(inp.hasOwnProperty('noCandidates')) ? JSON.parse(inp.noCandidates) : true}
+    }else{this.noCandidates = (inp)&&(inp.hasOwnProperty('noCandidates')) ? JSON.parse(inp.noCandidates) : false}
     if (this.urlVars.hasOwnProperty('noMarginal')){
         this.noMarginal=JSON.parse(this.urlVars.noMarginal);
     }else{this.noMarginal = (inp)&&(inp.hasOwnProperty('noMarginal')) ? JSON.parse(inp.noMarginal) : false}
@@ -292,7 +292,8 @@ GWCatalogue.prototype.init = function(){
     		"options":[
     			{"id": "filt-o1", "label":"%text.plotgw.filter.observingrun.O1%", "checked": true, "value": "O1" },
     			{"id": "filt-o2", "label":"%text.plotgw.filter.observingrun.O2%", "checked": true, "value": "O2" },
-    			{"id": "filt-o3", "label":"%text.plotgw.filter.observingrun.O3%", "checked": true, "value": "O3", "contains":"true" }
+    			{"id": "filt-o3", "label":"%text.plotgw.filter.observingrun.O3%", "checked": true, "value": "O3", "contains":"true" },
+                {"id": "filt-o4", "label":"%text.plotgw.filter.observingrun.O4%", "checked": true, "value": "O4", "contains":"true" }
     		]
 	    },
         "UTCdate": {"name": "%data.date.name%","type":"slider","format": "date","step": 86400000,
@@ -891,7 +892,7 @@ GWCatalogue.prototype.setColumns = function(datadict){
                     }else{
                         return gw.tl("<a target='_blank'title='"+gw.tl(d.opendata.text)+
                             "'  href='"+ d.opendata.url+
-                            "'>%text.gen.gwosc%</a></br>&nbsp;");
+                            "'>"+gw.tl(d.catalog)+"</a>&nbsp;");
                     }
                 }else{
                     return(gw.labBlank);
@@ -2182,7 +2183,7 @@ GWCatalogue.prototype.setStyles = function(){
             'tick':'#ccc',
             'probbar':'#333',
             'probbars':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',Terrestrial:'#cccccc'},
-            'guides':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',O1:'#ffcccc',O2:'#ccffcc',O3a:'#ccccff',O3b:'#55cccc'},
+            'guides':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',O1:'#ffcccc',O2:'#ccffcc',O3a:'#ccccff',O3b:'#55cccc',O4:'#cc55cc'},
             'probtxt':'#000'
         },
         'dark':{'class':'col-black','default':false,
@@ -2201,7 +2202,7 @@ GWCatalogue.prototype.setStyles = function(){
             'tick':'#555',
             'probbar':'#ccc',
             'probbars':{BBH:'#000096',BNS:'#960000',NSBH:'#009600',MassGap:'#009696',Terrestrial:'#555555'},
-            'guides':{BBH:'#000050',BNS:'#500000',NSBH:'#005000',MassGap:'#005050',O1:'#500000',O2:'#005000',O3a:'#000096',O3b:'#009696'},
+            'guides':{BBH:'#000050',BNS:'#500000',NSBH:'#005000',MassGap:'#005050',O1:'#500000',O2:'#005000',O3a:'#000096',O3b:'#009696',O4:'#960096'},
             'probtxt':'#fff'
         }
     }
@@ -2241,8 +2242,8 @@ GWCatalogue.prototype.setStyles = function(){
     }
     this.cValue = function(d) {return d.detType.best;};
     this.color1 = d3.scale.category10();
-    this.styleDomains = ['GW','Marginal','Candidate','BBH','BNS','MassGap','NSBH','O1','O2','O3a','O3b'];
-    this.legType = d3.scale.ordinal().range(['event','event','event','massguide','massguide','massguide','massguide','timeguide','timeguide','timeguide','timeguide']).domain(this.styleDomains);
+    this.styleDomains = ['GW','Marginal','Candidate','BBH','BNS','MassGap','NSBH','O1','O2','O3a','O3b','O4'];
+    this.legType = d3.scale.ordinal().range(['event','event','event','massguide','massguide','massguide','massguide','timeguide','timeguide','timeguide','timeguide','timeguide']).domain(this.styleDomains);
     this.color = d3.scale.ordinal().range(gw.getCol('dotfill')).domain(this.styleDomains);
     this.linestyles = d3.scale.ordinal().range(gw.getCol('dotline')).domain(this.styleDomains);
     this.linedashes = function(x){return((x=="GW")?0:3);}
@@ -2267,7 +2268,7 @@ GWCatalogue.prototype.setStyles = function(){
             legPosRange=[0,1,1,2,3,4,5,2,3,4,5,6];
             this.legYinit = {'event':0,'massguide':2,'timeguide':2};
         }else{
-            legPosRange=[0,1,2,3,4,5,6,3,4,5,6,7];
+            legPosRange=[0,1,2,3,4,5,6,3,4,5,6,7,8];
             this.legYinit = {'event':0,'massguide':3,'timeguide':3};
         }
         this.legPos = d3.scale.ordinal().range(legPosRange).domain(this.styleDomains);
@@ -2788,7 +2789,8 @@ GWCatalogue.prototype.setLang = function(){
         O1:this.tl('%text.plotgw.filter.observingrun.O1%'),
         O2:this.tl('%text.plotgw.filter.observingrun.O2%'),
         O3a:this.tl('%text.plotgw.filter.observingrun.O3%a'),
-        O3b:this.tl('%text.plotgw.filter.observingrun.O3%b')
+        O3b:this.tl('%text.plotgw.filter.observingrun.O3%b'),
+        O4:this.tl('%text.plotgw.filter.observingrun.O4%b')
     }
     d3.select('#lang-title')
         .html(this.tl('%text.plotgw.lang.title%'))
@@ -3907,7 +3909,10 @@ GWCatalogue.prototype.updateGuides = function () {
                 'vis':1,col:gw.getCol('guides')['O3a']},
             {'name':'O3b','t0':new Date('2019-11-01T15:00:00').valueOf(),
                 't1':new Date('2020-03-27T17:00:00').valueOf(),
-                'vis':1,col:gw.getCol('guides')['O3b']}
+                'vis':1,col:gw.getCol('guides')['O3b']},
+            {'name':'O4','t0':new Date('2023-05-18T00:00:00').valueOf(),
+                't1':new Date('2024-12-31T00:00:00').valueOf(),
+                'vis':1,col:gw.getCol('guides')['O4']}
         ];
         for (o in obsruns){
             or=obsruns[o];
@@ -4575,6 +4580,7 @@ GWCatalogue.prototype.addOptions = function(){
         gw.noCandidates=true;
         d3.select("#filt-conf").property("checked",true);
         gw.updateFilters();
+        gw.replot();
         // d3.select("#limOpt").property("checked",false);
         // gw.limitOptions();
     }).on("mouseover",function(){
@@ -4591,6 +4597,7 @@ GWCatalogue.prototype.addOptions = function(){
         gw.noCandidates=false;
         d3.select("#filt-conf").property("checked",false);
         gw.updateFilters();
+        gw.replot();
         // d3.select("#limOpt").property("checked",true);
         // gw.limitOptions();
     }).on("mouseover",function(){
@@ -4608,6 +4615,7 @@ GWCatalogue.prototype.addOptions = function(){
         gw.noMarginal=false;
         d3.select("#filt-conf").property("checked",true);
         gw.updateFilters();
+        gw.replot();
         // d3.select("#limOpt").property("checked",false);
         // gw.limitOptions();
     }).on("mouseover",function(){
@@ -5015,6 +5023,7 @@ GWCatalogue.prototype.addFilter = function(replot){
     }
     document.getElementById("filter-block").addEventListener("change",function(){
         gw.updateFilters();
+        gw.replot();
     })
     
     gw.updateFilters();
@@ -5295,6 +5304,9 @@ GWCatalogue.prototype.makePlot = function(){
 GWCatalogue.prototype.replot = function(){
     // remove plots and redraw (e.g. on window resize)
     var gw=this;
+    gw.noMarginal=(d3.select("#filt-marg").property("checked"))?false:true;
+    gw.noCandidates=(d3.select("#filt-cand").property("checked"))?false:true;
+    gw.setStyles();
     // console.log(gw.sketchName);
     // remove elements
     d3.select("svg#svgSketch").remove()
