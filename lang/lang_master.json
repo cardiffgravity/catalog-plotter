@@ -176,6 +176,9 @@
     "text.plotgw.filter.observingrun.O1":{"_title":"Filter panel error checkbox","_text":"Label for O1","_type":"string","_usedef":true},
     "text.plotgw.filter.observingrun.O2":{"_title":"Filter panel error checkbox","_text":"Label for O2","_type":"string","_usedef":true},
     "text.plotgw.filter.observingrun.O3":{"_title":"Filter panel error checkbox","_text":"Label for O3","_type":"string","_usedef":true},
+    "text.plotgw.filter.observingrun.O3a":{"_title":"Filter panel error checkbox","_text":"Label for O3a","_type":"string","_usedef":true},
+    "text.plotgw.filter.observingrun.O3b":{"_title":"Filter panel error checkbox","_text":"Label for O3b","_type":"string","_usedef":true},
+    "text.plotgw.filter.observingrun.O4":{"_title":"Filter panel error checkbox","_text":"Label for O4","_type":"string","_usedef":true},
     "text.plotgw.filter.dettype.detections":{"_title":"Filter panel confirmed detections checkbox","_text":"Label for confirmed events","_type":"string"},
     "text.plotgw.filter.dettype.candidates":{"_title":"Filter panel candidate detections checkbox","_text":"Label for candidate events","_type":"string"},
 
