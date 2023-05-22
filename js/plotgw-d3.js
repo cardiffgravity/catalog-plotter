@@ -27,7 +27,7 @@ function GWCatalogue(inp){
     }else{this.noCandidates = (inp)&&(inp.hasOwnProperty('noCandidates')) ? JSON.parse(inp.noCandidates) : false}
     if (this.urlVars.hasOwnProperty('noMarginal')){
         this.noMarginal=JSON.parse(this.urlVars.noMarginal);
-    }else{this.noMarginal = (inp)&&(inp.hasOwnProperty('noMarginal')) ? JSON.parse(inp.noMarginal) : false}
+    }else{this.noMarginal = (inp)&&(inp.hasOwnProperty('noMarginal')) ? JSON.parse(inp.noMarginal) : true}
 
     if (this.confirmedOnly){
         this.noCandidates=false;
@@ -2788,9 +2788,9 @@ GWCatalogue.prototype.setLang = function(){
         MassGap:this.tl('%text.gen.massgap%'),
         O1:this.tl('%text.plotgw.filter.observingrun.O1%'),
         O2:this.tl('%text.plotgw.filter.observingrun.O2%'),
-        O3a:this.tl('%text.plotgw.filter.observingrun.O3%a'),
-        O3b:this.tl('%text.plotgw.filter.observingrun.O3%b'),
-        O4:this.tl('%text.plotgw.filter.observingrun.O4%b')
+        O3a:this.tl('%text.plotgw.filter.observingrun.O3a%'),
+        O3b:this.tl('%text.plotgw.filter.observingrun.O3b%'),
+        O4:this.tl('%text.plotgw.filter.observingrun.O4%')
     }
     d3.select('#lang-title')
         .html(this.tl('%text.plotgw.lang.title%'))
@@ -3418,7 +3418,7 @@ GWCatalogue.prototype.drawGraph = function(){
       // .attr("transform", function(d) { return "translate(0," +
       //     (gw.legPos(d) * 24) + ")"; })
       .attr("transform", function(d) {
-          var thisY="translate(0," +((gw.legY[gw.legType(d)]+1) * 24*gw.scl) + ")";
+          var thisY="translate(0," +((gw.legPos(d)+1) * 24*gw.scl) + ")";
           gw.legY[gw.legType(d)]+=1;
           // console.log('legY',d,gw.legOpacity(d),gw.legY);
           return thisY; })
@@ -5024,6 +5024,7 @@ GWCatalogue.prototype.addFilter = function(replot){
     document.getElementById("filter-block").addEventListener("change",function(){
         gw.updateFilters();
         gw.replot();
+        gw.showFilter();
     })
     
     gw.updateFilters();
