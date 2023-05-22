@@ -155,6 +155,7 @@
  "text.plotgw.filter.observingrun.O3":"O3",
  "text.plotgw.filter.observingrun.O3a":"O3a",
  "text.plotgw.filter.observingrun.O3b":"O3b",
+ "text.plotgw.filter.observingrun.O4":"O4",
  "text.plotgw.filter.dettype.detections":"Confirmed",
  "text.plotgw.filter.dettype.candidates":"Candidates",
  "text.plotgw.filter.dettype.marginal":"Marginal",
