@@ -2281,7 +2281,7 @@ GWCatalogue.prototype.setStyles = function(){
     
     // this.squareopacity = d3.scale.ordinal().range([0,0,0,1,1,1,1,1,1,1,1,1]).domain(this.styleDomains);
     this.getOpacity = function(d) {
-        return (((d[gw.xvar])&&(d[gw.yvar])) ? gw.dotopacity(d.detType) : 0)}
+        return (((d[gw.xvar])&&(d[gw.yvar])) ? gw.dotOp(d) : 0)}
     this.tickTimeFormat = d3.time.format("%Y-%m");
     // this.isEst = function(d,param){
     //     return (d[param]) ? d[param].hasOwnProperty('est') : false;
@@ -5092,7 +5092,7 @@ GWCatalogue.prototype.updateFilters = function () {
         if(good == 0) return false;
 		return true;
 	}
-
+    
     var active;
 	// Loop over each event
 	for(var i = 0; i < this.cat.data.length; i++){
