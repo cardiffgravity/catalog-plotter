@@ -225,13 +225,12 @@ GWCatalogue.prototype.init = function(){
     //initialyse common values
     this.flySp=1000;
     this.defaults = {
-        xvar:"M1",
-        yvar:"M2",
-        panel:"info",
+        xvar:"UTCdate",
+        yvar:"FAR",
+        panel:"filter",
         lang:"en",
         showerrors:true,
-        selectedevent:"GW170814",
-        panel:"info"
+        selectedevent:"S230518h"
     }
     this.xvar = (this.urlVars.x) ? this.urlVars.x : this.defaults.xvar;
     this.yvar = (this.urlVars.y) ? this.urlVars.y : this.defaults.yvar;
