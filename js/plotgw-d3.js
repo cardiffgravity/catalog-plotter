@@ -3909,7 +3909,7 @@ GWCatalogue.prototype.updateGuides = function () {
             {'name':'O3b','t0':new Date('2019-11-01T15:00:00').valueOf(),
                 't1':new Date('2020-03-27T17:00:00').valueOf(),
                 'vis':1,col:gw.getCol('guides')['O3b']},
-            {'name':'O4','t0':new Date('2023-05-18T00:00:00').valueOf(),
+            {'name':'O4','t0':new Date('2023-05-23T15:00:00').valueOf(),
                 't1':new Date('2024-12-31T00:00:00').valueOf(),
                 'vis':1,col:gw.getCol('guides')['O4']}
         ];
