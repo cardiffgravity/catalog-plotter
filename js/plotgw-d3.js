@@ -2613,7 +2613,7 @@ GWCatalogue.prototype.whenLoaded = function(){
     gw.orderData();
     this.setScales();
     gw.makePlot();
-    panel = (this.urlVars.panel) ? this.urlVars.panel : this.getPanel();
+    panel = (this.defaults.panel) ? this.defaults.panel : this.getPanel();
     gw.setPanel(panel)
     if(gw.debug){console.log('plotted');}
     // select a default event
