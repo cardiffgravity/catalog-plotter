@@ -16,6 +16,8 @@ function GWCatalogue(inp){
     var gw=this;
     this.inp=inp;
     this.getUrlVars();
+    this.debug=(this.inp && (this.inp.debug||this.inp.debug==false)) ? this.inp.debug : false;
+    console.log('debug',this.debug);
     if (this.urlVars.datasrc){this.datasrc=this.urlVars.datasrc}
     else{this.datasrc = (inp)&&(inp.datasrc) ? inp.datasrc : "local"}
 
@@ -2598,7 +2600,7 @@ GWCatalogue.prototype.drawGraphInit = function(){
         gw.cat = new GWCat(eventsCallback,{datasrc:'gwosc','fileIn':gw.fileInEvents,gwoscFile:gw.fileInGwosc,debug:this.debug});
     }else{
         // gw.cat = new GWCat(eventsCallback,{confirmedOnly:gw.confirmedOnly,noCandidates:gw.noCandidates,noMarginal:gw.noMarginal,'fileInJsonp':gw.fileInEvents,'fileIn':gw.fileInEvents});
-        gw.cat = new GWCat(eventsCallback,{'fileInJsonp':gw.fileInEvents,'fileIn':gw.fileInEvents});
+        gw.cat = new GWCat(eventsCallback,{'fileInJsonp':gw.fileInEvents,'fileIn':gw.fileInEvents,debug:this.debug});
     }
 
 
