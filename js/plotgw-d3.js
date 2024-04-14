@@ -2184,7 +2184,7 @@ GWCatalogue.prototype.setStyles = function(){
             'tick':'#ccc',
             'probbar':'#333',
             'probbars':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',Terrestrial:'#cccccc'},
-            'guides':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',O1:'#ffcccc',O2:'#ccffcc',O3a:'#ccccff',O3b:'#55cccc',O4:'#cc55cc'},
+            'guides':{BBH:'#ccccff',BNS:'#ffcccc',NSBH:'#ccffcc',MassGap:'#ccffff',O1:'#ffcccc',O2:'#ccffcc',O3a:'#ccccff',O3b:'#55cccc',O4a:'#ffccff',O4b:'#cc55cc'},
             'probtxt':'#000'
         },
         'dark':{'class':'col-black','default':false,
@@ -2203,7 +2203,7 @@ GWCatalogue.prototype.setStyles = function(){
             'tick':'#555',
             'probbar':'#ccc',
             'probbars':{BBH:'#000096',BNS:'#960000',NSBH:'#009600',MassGap:'#009696',Terrestrial:'#555555'},
-            'guides':{BBH:'#000050',BNS:'#500000',NSBH:'#005000',MassGap:'#005050',O1:'#500000',O2:'#005000',O3a:'#000096',O3b:'#009696',O4:'#960096'},
+            'guides':{BBH:'#000050',BNS:'#500000',NSBH:'#005000',MassGap:'#005050',O1:'#500000',O2:'#005000',O3a:'#000096',O3b:'#009696',O4a:'#500050',O4b:'#960096'},
             'probtxt':'#fff'
         }
     }
@@ -2243,8 +2243,8 @@ GWCatalogue.prototype.setStyles = function(){
     }
     this.cValue = function(d) {return d.detType.best;};
     this.color1 = d3.scale.category10();
-    this.styleDomains = ['GW','Marginal','Candidate','BBH','BNS','MassGap','NSBH','O1','O2','O3a','O3b','O4'];
-    this.legType = d3.scale.ordinal().range(['event','event','event','massguide','massguide','massguide','massguide','timeguide','timeguide','timeguide','timeguide','timeguide']).domain(this.styleDomains);
+    this.styleDomains = ['GW','Marginal','Candidate','BBH','BNS','MassGap','NSBH','O1','O2','O3a','O3b','O4a','O4b'];
+    this.legType = d3.scale.ordinal().range(['event','event','event','massguide','massguide','massguide','massguide','timeguide','timeguide','timeguide','timeguide','timeguide','timeguide']).domain(this.styleDomains);
     this.color = d3.scale.ordinal().range(gw.getCol('dotfill')).domain(this.styleDomains);
     this.linestyles = d3.scale.ordinal().range(gw.getCol('dotline')).domain(this.styleDomains);
     this.linedashes = function(x){return((x=="GW")?0:3);}
@@ -2263,13 +2263,13 @@ GWCatalogue.prototype.setStyles = function(){
     var legPosRange;
     this.setLegendPos = function(){
         if ((this.noCandidates)&&(this.noMarginal)){
-            legPosRange=[0,0,0,1,2,3,4,1,2,3,4,5];
+            legPosRange=[0,0,0,1,2,3,4,1,2,3,4,5,6];
             this.legYinit = {'event':0,'massguide':1,'timeguide':1};
         }else if((this.noCandidates)||(this.noMarginal)){
-            legPosRange=[0,1,1,2,3,4,5,2,3,4,5,6];
+            legPosRange=[0,1,1,2,3,4,5,2,3,4,5,6,7];
             this.legYinit = {'event':0,'massguide':2,'timeguide':2};
         }else{
-            legPosRange=[0,1,2,3,4,5,6,3,4,5,6,7,8];
+            legPosRange=[0,1,2,3,4,5,6,3,4,5,6,7,8,9];
             this.legYinit = {'event':0,'massguide':3,'timeguide':3};
         }
         this.legPos = d3.scale.ordinal().range(legPosRange).domain(this.styleDomains);
@@ -2791,7 +2791,8 @@ GWCatalogue.prototype.setLang = function(){
         O2:this.tl('%text.plotgw.filter.observingrun.O2%'),
         O3a:this.tl('%text.plotgw.filter.observingrun.O3a%'),
         O3b:this.tl('%text.plotgw.filter.observingrun.O3b%'),
-        O4:this.tl('%text.plotgw.filter.observingrun.O4%')
+        O4a:this.tl('%text.plotgw.filter.observingrun.O4a%'),
+        O4b:this.tl('%text.plotgw.filter.observingrun.O4b%')
     }
     d3.select('#lang-title')
         .html(this.tl('%text.plotgw.lang.title%'))
@@ -3911,9 +3912,12 @@ GWCatalogue.prototype.updateGuides = function () {
             {'name':'O3b','t0':new Date('2019-11-01T15:00:00').valueOf(),
                 't1':new Date('2020-03-27T17:00:00').valueOf(),
                 'vis':1,col:gw.getCol('guides')['O3b']},
-            {'name':'O4','t0':new Date('2023-05-23T15:00:00').valueOf(),
-                't1':new Date('2024-12-31T00:00:00').valueOf(),
-                'vis':1,col:gw.getCol('guides')['O4']}
+            {'name':'O4a','t0':new Date('2023-05-23T15:00:00').valueOf(),
+                't1':new Date('2024-01-16T00:00:00').valueOf(),
+                'vis':1,col:gw.getCol('guides')['O4a']},
+            {'name':'O4b','t0':new Date('2024-04-10T15:00:00').valueOf(),
+                't1':new Date('2025-02-29T00:00:00').valueOf(),
+                'vis':1,col:gw.getCol('guides')['O4b']}
         ];
         for (o in obsruns){
             or=obsruns[o];
