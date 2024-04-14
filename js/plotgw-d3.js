@@ -228,11 +228,11 @@ GWCatalogue.prototype.init = function(){
     this.flySp=1000;
     this.defaults = {
         xvar:"UTCdate",
-        yvar:"FAR",
+        yvar:"DL",
         panel:"filter",
         lang:"en",
         showerrors:true,
-        selectedevent:"S230518h"
+        selectedevent:"GW230529_181500"
     }
     this.xvar = (this.urlVars.x) ? this.urlVars.x : this.defaults.xvar;
     this.yvar = (this.urlVars.y) ? this.urlVars.y : this.defaults.yvar;
