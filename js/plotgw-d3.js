@@ -5542,16 +5542,18 @@ GWCatalogue.prototype.makeCanvas = function(){
                 params.y+=parseFloat(translate[2]);
             }
             var txt=el.innerHTML;
-            if (txt.search('tspan')>0){
-                elch=el.childNodes[0]
-                var txt0=txt.search('>');
-                var txt1=txt.search('</');
-                var txt=txt.substr(txt0+1,txt1-txt0-1)
-                params.x+=(elch.getAttribute('x')) ? parseFloat(elch.getAttribute('x')) : 0;
-                params.y+=(elch.getAttribute('y')) ? parseFloat(elch.getAttribute('y')) : 0;
-                params.dx+=(elch.getAttribute('dx')) ? parseFloat(elch.getAttribute('dx')) : 0;
-                params.dy+=(elch.getAttribute('dy')) ? parseFloat(elch.getAttribute('dy')) : 0;
-            }
+            try{
+                if (txt.search('tspan')>0){
+                    elch=el.childNodes[0]
+                    var txt0=txt.search('>');
+                    var txt1=txt.search('</');
+                    var txt=txt.substr(txt0+1,txt1-txt0-1)
+                    params.x+=(elch.getAttribute('x')) ? parseFloat(elch.getAttribute('x')) : 0;
+                    params.y+=(elch.getAttribute('y')) ? parseFloat(elch.getAttribute('y')) : 0;
+                    params.dx+=(elch.getAttribute('dx')) ? parseFloat(elch.getAttribute('dx')) : 0;
+                    params.dy+=(elch.getAttribute('dy')) ? parseFloat(elch.getAttribute('dy')) : 0;
+                }
+            }catch(err){}
             // if (params.txtalign){console.log(txt,params.txtalign);}
             ctx.save();
             ctx.translate(params.tl0_0,params.tl0_1);
