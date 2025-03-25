@@ -3916,7 +3916,7 @@ GWCatalogue.prototype.updateGuides = function () {
                 't1':new Date('2024-01-16T00:00:00').valueOf(),
                 'vis':1,col:gw.getCol('guides')['O4a']},
             {'name':'O4b','t0':new Date('2024-04-10T15:00:00').valueOf(),
-                't1':new Date('2025-02-29T00:00:00').valueOf(),
+                't1':new Date('2025-04-30T00:00:00').valueOf(),
                 'vis':1,col:gw.getCol('guides')['O4b']}
         ];
         for (o in obsruns){
@@ -5088,6 +5088,11 @@ GWCatalogue.prototype.updateFilters = function () {
 			if(gw.filters[key].options[o].checked){
 				if(gw.filters[key].options[o].contains){
 					// The string contains this option
+                    // console.log(i,key,o);
+                    // console.log(gw.cat.data[i],gw.filters[key].options[o].contains);
+                    // console.log(gw.filters[key].options,gw.filters[key].options[o]);
+                    // console.log(best.indexOf(gw.filters[key].options[o].value));
+                    // console.log('---');
 					if(best.indexOf(gw.filters[key].options[o].value) >= 0) good++;
 				}else{
 					if(best == gw.filters[key].options[o].value) return true;
