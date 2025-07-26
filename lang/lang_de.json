@@ -145,6 +145,7 @@
  "text.plotgw.filter.observingrun.O4":"O4",
  "text.plotgw.filter.observingrun.O4a":"O4a",
  "text.plotgw.filter.observingrun.O4b":"O4b",
+ "text.plotgw.filter.observingrun.O4c":"O4c",
  "text.plotgw.filter.dettype.detections": "Bestätigt",
  "text.plotgw.filter.dettype.candidates": "Kandidaten",
  "tooltip.plotgw.gwosc": "Gravitational Wave Open Science Center",

@@ -151,6 +151,7 @@
   "text.plotgw.filter.observingrun.O4":"O4",
   "text.plotgw.filter.observingrun.O4a":"O4a",
   "text.plotgw.filter.observingrun.O4b":"O4b",
+  "text.plotgw.filter.observingrun.O4c":"O4c",
   "text.plotgw.filter.dettype.detections": "Confirmés",
   "text.plotgw.filter.dettype.candidates": "Candidats",
   "tooltip.plotgw.gwosc": "Centre Onde Gravitationnelle pour une Science Ouverte (GWOSC)",
