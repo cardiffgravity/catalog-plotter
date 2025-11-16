@@ -276,7 +276,7 @@ GWCatalogue.prototype.init = function(){
         },
         "rho": {"name": "%data.rho.name%","type":"slider",
                 "min": {"default":0, "value":0, "label": "" },
-                "max": {"default":40, "value":40, "label": "" }
+                "max": {"default":60, "value":60, "label": "" }
         },
         // "logFAR": {"name": "log (%data.FAR.name%)","type":"slider","step":0.1,
         //         "min": {"default":-28, "value":-28, "label": "", "unit": "log(%data.skyArea.unit%)"},
@@ -284,7 +284,7 @@ GWCatalogue.prototype.init = function(){
         // },
         "deltaOmega":{"hidden":true,"dummy":"logDeltaOmega"},
         "logDeltaOmega": {"name": "log (%data.skyArea.name%)","type":"slider","step":0.1,
-                "min": {"default":1, "value":1, "label": "", "unit": "log(%data.skyArea.unit%)"},
+                "min": {"default":0.5, "value":0.5, "label": "", "unit": "log(%data.skyArea.unit%)"},
                 "max": {"default":5, "value":5, "label": "", "unit": " [log(%data.skyArea.unit%)]" }
         },
         "obsrun": {
@@ -553,7 +553,7 @@ GWCatalogue.prototype.stdlabel = function(d,src){
     }
     // txt='';
     if ((d[src].errv)&&(d[src].errv.length==2)){
-        if(gw.debug){console.log(d.name,src,d[src],d[src].errtype)}
+        if(gw.debug){console.log('reading',d.name,src,d[src],d[src].errtype)}
         if ((d[src].errtype)&&((d[src].errtype=='normal')||(d[src].errtype=='lim'))){
             // if(gw.debug){console.log(d.name,src,d[src],d[src].errtype)}
             sigfig=gw.columns[src].sigfig
@@ -5083,7 +5083,7 @@ GWCatalogue.prototype.updateFilters = function () {
         if(gw.cat.data[i][key]['best']){
             var best = gw.cat.getBest(gw.cat.dataOrder[i],key);
         }else{
-            var best = gw.cat.dataOrder[i][key];
+            var best = gw.cat.data[i][key];
         }
 
         // console.log('filter',i,key,best);
