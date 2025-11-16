@@ -2754,7 +2754,7 @@ GWCatalogue.prototype.setLang = function(){
     d3.select("#options-colour-label")
         .html(this.tl('%text.plotgw.colour%'))
     for (c in this.colourList){
-        console.log(c,d3.select('#colour-'+c));
+        // console.log(c,d3.select('#colour-'+c));
         d3.select('#colour-'+c).html(this.tl(this.colourList[c].label));
     }
     d3.select("#options-dotscale-label")
@@ -3425,7 +3425,7 @@ GWCatalogue.prototype.drawGraph = function(){
           gw.legY[gw.legType(d)]+=1;
           // console.log('legY',d,gw.legOpacity(d),gw.legY);
           return thisY; })
-      .attr("opacity",function(d){console.log(d,gw.legOpacity(d));return gw.legOpacity(d);});
+      .attr("opacity",function(d){console.log("legend opacity:",d,gw.legOpacity(d));return gw.legOpacity(d);});
           // op=(gw.legType(d)=='timeguide')?gw.showTimeGuides():(gw.legType(d)=='massguide')?gw.showMassGuides():1;
           // return(op);
       // });
@@ -3938,7 +3938,7 @@ GWCatalogue.prototype.updateGuides = function () {
             for (i in or.x){
                 or.points+=gw.xScale(or.x[i])+','+gw.yScale(or.y[i])+' '
             }
-            console.log(or.name,or);
+            if (this.debug) console.log("obsrun:",or.name,or);
         }
         if (gw.svg.select('.g-timeguidepolys').empty()){
             gw.svg.insert("g",":first-child").attr("class","guide timeguide g-timeguidepolys").attr("transform", "translate("+gw.margin.left+","+
@@ -3947,7 +3947,7 @@ GWCatalogue.prototype.updateGuides = function () {
                 .data(obsruns)
             .enter().append('polygon')
                 .attr('class','timeguidepoly')
-                .attr('fill',function(d){console.log(d.col);return d.col})
+                .attr('fill',function(d){return d.col})
                 .attr('stroke-width',gw.swErr)
                 .style('opacity',1)
         }
@@ -4273,7 +4273,7 @@ GWCatalogue.prototype.updateBothAxes = function(xvarNew,yvarNew) {
     gw.svg.select(".x-axis > .axisunitholder > tspan.axisunit")
         .text(gw.getUnit(gw.xvar,true,[' (',') ']));
     d3.select('#x-axis-filt-div').style("display",function(){
-        console.log('#x-axis-filt-div',(gw.hasFilter(gw.xvar))?1:0);
+        // console.log('#x-axis-filt-div',(gw.hasFilter(gw.xvar))?1:0);
         return ((gw.hasFilter(gw.xvar))?"block":"none");
     });
 
@@ -5117,14 +5117,20 @@ GWCatalogue.prototype.updateFilters = function () {
 			if(a.type == "slider"){
 				// Process each slider
 				//console.log(key,inRange(i,key,this.filters[key].slider.values))
-				if(!inRange(i,key,a.slider.values)) active = false;
-				//if(!active) console.log(i,key)
+				if(!inRange(i,key,a.slider.values)) {
+                    console.log('inactive (slider)',this.cat.data[i].name,key,a.slider.values,this.cat.data[i][key]);
+                    active = false;
+                }
 			}else if(a.type == "checkbox"){
-				if(!isChecked(i,key)) active = false;
+				if(!isChecked(i,key)) {
+                    console.log('inactive (checkbox):',this.cat.data[i].name,key,(this.cat.data[i][key].best)?this.cat.data[i][key].best:this.cat.data[i][key]);
+                    active = false;
+                }
 			}
 		}
         if (!(this.xvar in this.cat.data[i])&&!(this.yvar in this.cat.data[i])){
             active=false;
+            console.log('inactive (var):',this.cat.data[i].name,this.xvar,this.yvar)
         }
 		this.cat.data[i].active = active;
         if (this.cat.data[i].name==this.selectedevent){selEvNewStatus=active}
