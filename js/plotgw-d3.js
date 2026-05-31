@@ -5092,12 +5092,13 @@ GWCatalogue.prototype.updateFilters = function () {
 			if(gw.filters[key].options[o].checked){
 				if(gw.filters[key].options[o].contains){
 					// The string contains this option
-                    // console.log(i,key,o);
-                    // console.log(gw.cat.data[i],gw.filters[key].options[o].contains);
-                    // console.log(gw.filters[key].options,gw.filters[key].options[o]);
-                    // console.log(best.indexOf(gw.filters[key].options[o].value));
+                    // console.log(1,i,key,o);
+                    // console.log(2,gw.cat.data[i],gw.filters[key].options[o].contains);
+                    // console.log(3,gw.filters[key].options,gw.filters[key].options[o]);
+                    // console.log(4.1,best);
+                    // console.log(5,(best && typeof best.indexOf === 'function') ? best.indexOf(gw.filters[key].options[o].value) : "ERROR");
                     // console.log('---');
-					if(best.indexOf(gw.filters[key].options[o].value) >= 0) good++;
+					if(best && typeof best.indexOf === 'function' && best.indexOf(gw.filters[key].options[o].value) >= 0) good++;
 				}else{
 					if(best == gw.filters[key].options[o].value) return true;
 				}
